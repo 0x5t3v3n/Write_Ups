@@ -22,7 +22,7 @@ This command was executed multiple times (5–10 attempts) to simulate brute for
 xfreerdp /v:192.168.100.20 /u:Administrator /p:WrongPassword /cert:ignore
 Repeated 5–10 times to generate failed login attempts.
 
-![image.png](RDP_Bruteforce/screenshots/image.png)
+![$(C:\Users\5c4rf\Projects\Write_Ups\detection_validation_bruteforce\detection_engineering_rdp\RDP_BruteForce\screenshots\image.png.BaseName)](screenshots/image.png)
 
 ## Detection Results
 
