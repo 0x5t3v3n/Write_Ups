@@ -4,26 +4,54 @@ Detection Engineering Lab: RDP Brute Force Simulation
 
 ## Objective
 
-Validate Wazuh detection of brute force attacks via RDP.
+The goal of this simulation was to validate that a Wazuh-based SOC environment can detect brute force login attempts against a Windows system via Remote Desktop Protocol (RDP).
 
 ## Environment
 
-- Kali Linux attacker VM: 192.168.100.11
-- Windows Server 2022 victim VM: 192.168.100.20
-- Wazuh Server: 192.168.100.10
+-- **Attacker:** Kali Linux – 192.168.100.11  
+- **Target:** Windows Server 2022 – 192.168.100.20  
+- **SIEM:** Wazuh Server – 192.168.100.10  
 - Tools used: xfreerdp
 
 ## Attack Execution
 
+The attack was simulated using repeated failed RDP login attempts from the attacker machine.
+This command was executed multiple times (5–10 attempts) to simulate brute force behavior by triggering repeated authentication failures.
+
+'''bash
 xfreerdp /v:192.168.100.20 /u:Administrator /p:WrongPassword /cert:ignore
 Repeated 5–10 times to generate failed login attempts.
 
-![image.png](image.png)
+![image.png](screenshots/image.png)
 
 ## Detection Results
 
+The attack generated multiple failed login events, which were successfully captured by Wazuh.
+
+Windows Event ID 4625 (Failed Logon) was observed
+Source IP: 192.168.100.11 (Kali attacker)
+Target system: Windows Server VM
+Multiple authentication failures detected within a short time frame
+
+Windows Event ID 4625 indicates a failed login attempt.
+
+The logs were filtered to display Event ID 4625, revealing multiple failed login attempts.
+
+Drilling into a single event shows detailed information about the failed login attempt.
+
+Agent Name: Windows VM (monitored endpoint)
+Event: Failed logon attempt
+
+Further inspection shows:
+
+System name: win22-vm
+Message: "An account failed to log on"
+Source IP: 192.168.100.11
+Destination IP: Windows Server VM
+
+
 - Event ID 4625 logged in Wazuh
-- Source IP: 192.168.100.30
+- Source IP: 192.168.100.11
 - Failed login attempts detected as expected
 - Screenshots attached (Wazuh logs)
 
@@ -49,13 +77,31 @@ Showing the pattern, the several attempts we made on the kali vm, are showed her
 
 ## Analysis
 
-- Initial attempts with Hydra and CrackMapExec failed due to tool instability.
-- Using xfreerdp allowed reliable log generation.
-- Wazuh successfully captured and reported repeated authentication failures.
+Analysis
+
+Initial attempts to simulate the attack using tools such as Hydra and CrackMapExec were unsuccessful due to instability and protocol limitations in the lab environment.
+
+To ensure reliable log generation, repeated failed RDP authentication attempts were manually executed using xfreerdp. This approach successfully simulated brute force behavior and generated the required telemetry.
+
+Wazuh effectively:
+
+Collected Windows Security Event logs
+Detected repeated authentication failures
+Allowed correlation of activity to the attacker’s IP address
 
 ## Conclusion
 
-Detection pipeline is validated. Brute force attempts via RDP can be reliably identified.
+Conclusion
+
+This simulation confirms that the Wazuh detection pipeline is functioning correctly and is capable of identifying brute force login attempts against RDP services.
+
+Repeated failed authentication attempts were successfully logged, detected, and analyzed, demonstrating the effectiveness of the configured monitoring environment.
+
+Key Takeaways
+Event ID 4625 is critical for detecting brute force attempts
+Repeated failed logins from a single source are a strong attack indicator
+Detection validation is just as important as detection configuration
+Tool instability can occur, and adapting methodology is part of real-world workflows
 
 ## Screenshots
 
