@@ -12,9 +12,10 @@ and PortSwigger Web Security Academy labs.
 | Machine | Difficulty | Tags | Write-Up |
 |--------|------------|------|----------|
 | WingData | - | - | [GitHub](./HTB/WingData/WingData.md) |
+| Eighteen | - | - | [GitHub](./HTB/Eighteen/Eighteen.md) |
+| Interpreter | - | - | [GitHub](./HTB/Interpreter/Interpreter.md) |
 
 ---
-
 ## 🟦 TryHackMe
 
 | Room | Tags | Write-Up |
