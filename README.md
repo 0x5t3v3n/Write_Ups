@@ -14,6 +14,7 @@ and PortSwigger Web Security Academy labs.
 | WingData | - | - | [GitHub](./HTB/WingData/WingData.md) |
 | Eighteen | - | - | [GitHub](./HTB/Eighteen/Eighteen.md) |
 | Interpreter | - | - | [GitHub](./HTB/Interpreter/Interpreter.md) |
+| Pterodactyl | - | - | [GitHub](./HTB/Pterodactyl/Pterodactyl.md) |
 
 ---
 ## 🟦 TryHackMe
