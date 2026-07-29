@@ -4,7 +4,6 @@ Aspiring cybersecurity professional building hands-on experience in **offensive 
 
 My goal is to develop into a well-rounded **purple team security professional** by understanding attacker techniques, developing defensive detections, and improving security visibility through practical experience.
 
-📚 **Medium:** [@0x5t3v3n](https://medium.com/@0x5t3v3n_55139)
 
 ---
 
