@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Environment / secrets
+.env
+*.env
+credentials.txt
+secrets.txt
+
+# Logs
+*.log
+
+# Packet captures
+*.pcap
+*.pcapng
+
+# Archives
+*.zip
+*.tar
+*.gz
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
