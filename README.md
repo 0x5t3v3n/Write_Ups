@@ -1,196 +1,216 @@
-# 📓 Cybersecurity Portfolio — 0x5t3v3n
+# Cybersecurity Portfolio — 0x5t3v3n
 
-Aspiring cybersecurity professional building hands-on experience in **offensive security, defensive security, and detection engineering** through Capture The Flag challenges, security labs, and home lab environments.
+Hands-on cybersecurity portfolio focused on **penetration testing, offensive security, defensive security, and detection engineering**.
 
-My goal is to develop into a well-rounded **purple team security professional** by understanding attacker techniques, developing defensive detections, and improving security visibility through practical experience.
+I build practical labs and document the process from **initial reconnaissance through exploitation, post-exploitation, detection, and analysis**. My goal is to develop into a cybersecurity professional who understands both how attacks work and how defenders can detect and respond to them.
 
+## Current Focus
 
----
-
-# 👤 About Me
-
-I am building practical cybersecurity skills through hands-on labs, CTF challenges, and home lab projects focused on both **red team operations** and **blue team defense**.
-
-Current focus areas:
-
-- Vulnerability assessment and exploitation
-- Web application security
-- Active Directory security
-- Security monitoring and detection engineering
-- Incident response fundamentals
-
-Effective security requires understanding both attacker methodologies and defensive strategies.
+* Penetration testing and vulnerability assessment
+* Active Directory security
+* Web application security
+* Network reconnaissance and enumeration
+* Privilege escalation
+* Security monitoring and detection engineering
+* Windows event analysis
+* Incident response fundamentals
+* Red-team and blue-team lab exercises
 
 ---
 
-# 🛠️ Skills & Tools
+# Technical Skills
 
-## 🔴 Offensive Security
+## Offensive Security
 
-| Category | Tools / Skills |
-|----------|----------------|
-| Reconnaissance | Nmap, Gobuster, FFUF |
-| Web Security | Burp Suite, SQL Injection, LFI, XSS |
-| Exploitation | Metasploit, Manual Exploitation Techniques |
-| Active Directory | BloodHound, Impacket |
-| Enumeration | Service Discovery, Directory Enumeration, Privilege Escalation |
+| Area               | Tools / Techniques                                  |
+| ------------------ | --------------------------------------------------- |
+| Reconnaissance     | Nmap, NetExec, Gobuster, FFUF                       |
+| Web Security       | Burp Suite, SQL Injection, LFI, XSS                 |
+| Exploitation       | Metasploit, manual exploitation                     |
+| Active Directory   | BloodHound, Impacket, Kerberos                      |
+| Credential Attacks | Kerberoasting, password cracking                    |
+| Post-Exploitation  | Enumeration, privilege escalation, lateral movement |
 
----
+## Defensive Security
 
-## 🔵 Defensive Security
+| Area                  | Tools / Techniques                        |
+| --------------------- | ----------------------------------------- |
+| SIEM                  | Wazuh                                     |
+| Windows Monitoring    | Windows Event Logs, Sysmon                |
+| Detection Engineering | Wazuh rules, Sigma concepts, MITRE ATT&CK |
+| Threat Hunting        | Event analysis, IOC identification        |
+| Incident Response     | Alert triage and investigation            |
+| Malware Analysis      | Static and dynamic analysis fundamentals  |
 
-| Category | Tools / Skills |
-|----------|----------------|
-| SIEM | Wazuh, Log Analysis, Alert Triage |
-| Detection Engineering | Sysmon, Sigma Rules, MITRE ATT&CK |
-| Incident Response | Threat Hunting, IOC Analysis |
-| Malware Analysis | Static Analysis, Dynamic Analysis Fundamentals |
-| Networking | TCP/IP, DNS, HTTP, Firewall Concepts |
+## Programming & Scripting
 
----
-
-# ⭐ Featured Projects
-
-## 🖥️ Security Operations Home Lab
-
-Built a virtual SOC environment to simulate attacker activity and practice defensive monitoring.
-
-### Technologies:
-
-- Wazuh SIEM
-- Windows Server
-- Sysmon
-- Kali Linux
-- VirtualBox
-
-### Skills Demonstrated:
-
-- Security event generation
-- Windows event log analysis
-- Alert triage
-- Detection engineering
-- Incident response workflows
-
-Write-Up:
-
-[GitHub](./Bruteforce_detection_sim/) · [Medium](https://medium.com/@0x5t3v3n_55139/rdp-brute-force-simulation-f145defaf2d9)
+* Python
+* Bash
+* PowerShell
 
 ---
 
-# 📖 Certifications & Training
+# Home Lab
 
-## Completed
+My home lab is a virtualized environment designed to simulate both **attacker and defender workflows**.
 
-- Cisco Networking Academy — Ethical Hacker
-- EC-Council — Pentesting Fundamentals
-- EC-Council — Bash Scripting
-- TCM Security — Practical Help Desk Fundamentals
+### Environment
 
-## Currently Studying
+* Kali Linux — attacker
+* Windows Server — Active Directory domain controller / victim
+* Ubuntu — victim system
+* Ubuntu — Wazuh server
+* VirtualBox
+* Wazuh
+* Sysmon
+* Active Directory
 
-- CompTIA Security+
-- Hack The Box Academy
-- TryHackMe Learning Paths
-- CS50 Python
+The lab allows me to generate attacks against controlled systems and then investigate the resulting telemetry from the defensive side.
+
+## Home Lab Projects
+
+| Project                                                                                   | Focus                                           |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [AD Environment Setup](./HomeLab/AD-Environment-Setup/)                                   | Active Directory domain and lab environment     |
+| [Wazuh Server](./HomeLab/Creating-Wazuh-Server/)                                          | Wazuh SIEM deployment                           |
+| [Network Topology](./HomeLab/Network-Topology/)                                           | Virtualized security lab architecture           |
+| [Kerberoasting](./HomeLab/Kerberoasting/)                                                 | Active Directory credential attack and analysis |
+| [Privilege Escalation](./HomeLab/Privilege-Escalation/)                                   | Simulated privilege escalation activity         |
+| [Wazuh Agent Deployment](./HomeLab/AD-Environment-Setup/Wazuh-Agent-Deployment-WIN-DC01/) | Windows endpoint monitoring                     |
+
+## Featured Home Lab Exercise
+
+### Kerberoasting
+
+A controlled Active Directory attack beginning with low-privileged domain credentials, followed by:
+
+1. Network and domain reconnaissance
+2. Active Directory enumeration
+3. SPN discovery
+4. Kerberos service-ticket requests
+5. TGS hash extraction
+6. Offline password cracking
+7. Credential recovery
+8. Documentation of the attack chain
+
+[Read the Red Team Write-Up](./HomeLab/Kerberoasting/Kerberoasting-RedTeam-Writeup.md)
+
+---
+
+# Detection Engineering
+
+My defensive work focuses on understanding what an attack looks like from the perspective of the systems being monitored.
+
+## RDP Brute-Force Detection
+
+Simulated repeated failed RDP authentication attempts and investigated Windows Event ID 4625 through Wazuh.
+
+[View Project](./Bruteforce_detection_sim/)
+
+## Sysmon & Wazuh Detection Engineering
+
+Configured Sysmon telemetry and Wazuh rules to improve endpoint visibility and detection capabilities.
+
+[View Project](./Detection_Engineering/)
 
 ---
 
-# 💻 Programming & Scripting
+# Hack The Box
 
-- Python
-- Bash
-- PowerShell
+Hands-on penetration testing practice using retired machines and challenge environments.
 
----
+## Machines
 
-# 🏴 Hack The Box Write-Ups
+### Orion
 
-Hands-on penetration testing practice through retired machines and challenge environments.
+Web application and Linux penetration testing exercise involving reconnaissance, vulnerability identification, exploitation, and privilege escalation.
 
-Documenting:
-
-- Enumeration methodology
-- Vulnerability discovery
-- Exploitation paths
-- Privilege escalation techniques
-- Lessons learned
-
-## Completed Machines
-
-| Machine | Skills Demonstrated |
-|----------|---------------------|
-| Nexus | Web Enumeration, VHost Discovery, Git Exposure, Privilege Escalation |
-| Makesense | WordPress Enumeration, XSS, RCE, Credential Harvesting |
-| Nimbus | SSRF, AWS IMDS, Cloud Security |
-| Checkpoint | Active Directory Enumeration, BloodHound, Impacket |
-
----
+[View Write-Up](./HTB/Machines/Orion/)
 
 ## Season 10
 
-| Machine | Skills Practiced | Write-Up |
-|---------|-----------------|----------|
-| WingData | Enumeration, Exploitation | [GitHub](./HTB/WingData/WingData.md) |
-| Eighteen | Web Enumeration, Exploitation | [GitHub](./HTB/Eighteen/Eighteen.md) |
-| Interpreter | Enumeration, Privilege Escalation | [GitHub](./HTB/Interpreter/Interpreter.md) |
-| Pterodactyl | Web Security, Exploitation | [GitHub](./HTB/Pterodactyl/Pterodactyl.md) |
+| Machine     | Skills Practiced                  | Write-Up                                               |
+| ----------- | --------------------------------- | ------------------------------------------------------ |
+| WingData    | Enumeration, exploitation         | [Write-Up](./HTB/Season_10/WingData/WingData.md)       |
+| Eighteen    | Web enumeration, exploitation     | [Write-Up](./HTB/Season_10/Eighteen/Eighteen.md)       |
+| Interpreter | Enumeration, privilege escalation | [Write-Up](./HTB/Season_10/Interpreter/Interpreter.md) |
+| Pterodactyl | Web security, exploitation        | [Write-Up](./HTB/Season_10/Pterodactyl/Pterodactyl.md) |
+| Facts       | Web enumeration and exploitation  | [Write-Up](./HTB/Season_10/facts/facts.md)             |
 
-## Season 11
+## Starting Point
 
-| Machine | Skills Practiced | Write-Up |
-|---------|-----------------|----------|
-| Nexus | Web Application Testing, Enumeration, Exploitation | [GitHub](./HTB/Season_11/Nexus/Nexus.md) |
-
----
-
-# 🟢 Hack The Box Starting Point
-
-| Machine | Skills Practiced | Write-Up |
-|---------|-----------------|----------|
-| Fawn | FTP Enumeration, Service Discovery | [GitHub](./HTB/Starting%20Point/Fawn/fawn.md) |
-| Meow | Telnet Enumeration, Basic Exploitation | [GitHub](./HTB/Starting%20Point/Meow/meow.md) |
+| Machine | Skills Practiced                       | Write-Up                                        |
+| ------- | -------------------------------------- | ----------------------------------------------- |
+| Fawn    | FTP enumeration, service discovery     | [Write-Up](./HTB/Starting%20Point/Fawn/fawn.md) |
+| Meow    | Telnet enumeration, basic exploitation | [Write-Up](./HTB/Starting%20Point/Meow/meow.md) |
 
 ---
 
-# 🟦 TryHackMe
+# TryHackMe
 
-Hands-on cybersecurity labs covering offensive security, defensive security, and security fundamentals.
+Hands-on security labs covering web security, enumeration, exploitation, and security fundamentals.
 
-| Room | Skills Practiced | Write-Up |
-|------|-----------------|----------|
-| TakeOver | Subdomain Enumeration | [GitHub](./THM/TakeOver/) |
-| Lo-Fi | Local File Inclusion (LFI) | [GitHub](./THM/Lo-Fi/) |
-| Advent of Cyber 2025 — Day 4 | AI Security Concepts | Medium |
-| Advent of Cyber 2025 — Day 5 | IDOR Vulnerabilities | Medium |
-| Advent of Cyber 2025 — Day 6 | Malware Analysis | Medium |
-| Advent of Cyber 2025 — Day 7 | Network Discovery | Medium |
-| Advent of Cyber 2025 — Passwords | Password Security & Cracking | Medium |
-| Advent of Cyber 2025 — XSS | Cross-Site Scripting | [GitHub](./THM/AoC-2025-XSS/) |
+| Room                  | Skills Practiced                 | Write-Up                                       |
+| --------------------- | -------------------------------- | ---------------------------------------------- |
+| TakeOver              | Subdomain enumeration            | [Write-Up](./THM/TakeOver/TakeOver.md)         |
+| Lo-Fi                 | Local File Inclusion             | [Write-Up](./THM/Lo-Fi/Lo-Fi.md)               |
+| Lookup                | Web enumeration and exploitation | [Write-Up](./THM/Lookup/Lookup.md)             |
+| web-app               | Web application security         | [Write-Up](./THM/web-app/web-app.md)           |
+| Advent of Cyber — XSS | Cross-Site Scripting             | [Write-Up](./THM/AoC-2025-XSS/AoC-2025-XSS.md) |
 
 ---
 
-# 🟧 PortSwigger Web Security Academy
+# Other Projects
 
-Web application security practice labs.
+## Hacker AI Bot
 
-| Lab | Skills Practiced | Write-Up |
-|-----|-----------------|----------|
-| SQL Injection — Lab 1 | SQL Injection Fundamentals | Medium |
+Python-based security tooling experimentation involving reconnaissance and penetration-testing workflows.
 
----
-
-# 🎯 Career Goal
-
-Develop into a cybersecurity professional capable of bridging offensive and defensive security teams by:
-
-- Understanding attacker techniques
-- Identifying vulnerabilities
-- Building detections
-- Improving security visibility
-- Supporting incident response efforts
-
-My long-term goal is to contribute as a **purple team security professional** who can identify weaknesses, improve defenses, and help organizations better understand their security posture.
+[View Project](./hacker_AI_Bot/)
 
 ---
 
-_Last updated: July 2026_
+# Certifications & Training
+
+## Completed
+
+* TCM Security — Practical Help Desk Fundamentals
+* Cisco Networking Academy — Ethical Hacker
+* Cisco Networking Academy — Introduction to Cybersecurity
+* Cisco Networking Academy — Packet Tracer
+* EC-Council — Pentesting Fundamentals
+* EC-Council — Bash Scripting
+* EC-Council — Ethical Hacking Essentials
+
+## Currently Studying
+
+* CompTIA Security+
+* Hack The Box Academy
+* TryHackMe
+* Python
+
+---
+
+# Career Direction
+
+My current career path is focused on progressing into professional cybersecurity roles, beginning with practical IT and security experience and progressing toward **penetration testing and red-team operations**.
+
+Long term, I want to develop strong capability across both offensive and defensive security so that I can:
+
+* Understand how attack chains work
+* Identify vulnerabilities
+* Exploit systems in controlled environments
+* Analyze the telemetry generated by attacks
+* Develop and improve detections
+* Investigate security events
+* Help organizations strengthen their security posture
+
+---
+
+# Portfolio
+
+* GitHub: [0x5t3v3n](https://github.com/0x5t3v3n)
+
+---
+
+*Last updated: September 2026*
