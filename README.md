@@ -157,6 +157,7 @@ Hands-on security labs covering web security, enumeration, exploitation, and sec
 | Lookup                | Web enumeration and exploitation | [Write-Up](./THM/Lookup/Lookup.md)             |
 | web-app               | Web application security         | [Write-Up](./THM/web-app/web-app.md)           |
 | Advent of Cyber — XSS | Cross-Site Scripting             | [Write-Up](./THM/AoC-2025-XSS/AoC-2025-XSS.md) |
+| PHP2Shell             | PHP engine internals, memory corruption, CVE analysis | [Write-Up](./THM/PHP2Shell/PHP2Shell.md) |
 
 ---
 
