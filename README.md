@@ -125,24 +125,24 @@ Hands-on penetration testing practice using retired machines and challenge envir
 
 Web application and Linux penetration testing exercise involving reconnaissance, vulnerability identification, exploitation, and privilege escalation.
 
-[View Write-Up](./HTB/Machines/Orion/)
+[View Write-Up](./HTB/Season_10/Orion/)
 
 ## Season 10
 
 | Machine     | Skills Practiced                  | Write-Up                                               |
 | ----------- | --------------------------------- | ------------------------------------------------------ |
-| WingData    | Enumeration, exploitation         | [Write-Up](./HTB/Season_10/WingData/WingData.md)       |
-| Eighteen    | Web enumeration, exploitation     | [Write-Up](./HTB/Season_10/Eighteen/Eighteen.md)       |
-| Interpreter | Enumeration, privilege escalation | [Write-Up](./HTB/Season_10/Interpreter/Interpreter.md) |
-| Pterodactyl | Web security, exploitation        | [Write-Up](./HTB/Season_10/Pterodactyl/Pterodactyl.md) |
-| Facts       | Web enumeration and exploitation  | [Write-Up](./HTB/Season_10/facts/facts.md)             |
+| WingData    | Enumeration, exploitation         | [Write-Up](./HTB/Season_10/WingData/README.md)       |
+| Eighteen    | Web enumeration, exploitation     | [Write-Up](./HTB/Season_10/Eighteen/README.md)       |
+| Interpreter | Enumeration, privilege escalation | [Write-Up](./HTB/Season_10/Interpreter/README.md) |
+| Pterodactyl | Web security, exploitation        | [Write-Up](./HTB/Season_10/Pterodactyl/README.md) |
+| Facts       | Web enumeration and exploitation  | [Write-Up](./HTB/Season_10/Facts/README.md)             |
 
 ## Starting Point
 
 | Machine | Skills Practiced                       | Write-Up                                        |
 | ------- | -------------------------------------- | ----------------------------------------------- |
-| Fawn    | FTP enumeration, service discovery     | [Write-Up](./HTB/Starting%20Point/Fawn/fawn.md) |
-| Meow    | Telnet enumeration, basic exploitation | [Write-Up](./HTB/Starting%20Point/Meow/meow.md) |
+| Fawn    | FTP enumeration, service discovery     | [Write-Up](./HTB/Starting_Point/Fawn/README.md) |
+| Meow    | Telnet enumeration, basic exploitation | [Write-Up](./HTB/Starting_Point/Meow/README.md) |
 
 ---
 
