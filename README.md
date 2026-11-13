@@ -71,12 +71,12 @@ The lab allows me to generate attacks against controlled systems and then invest
 
 | Project                                                                                   | Focus                                           |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [AD Environment Setup](./HomeLab/AD-Environment-Setup/)                                   | Active Directory domain and lab environment     |
-| [Wazuh Server](./HomeLab/Creating-Wazuh-Server/)                                          | Wazuh SIEM deployment                           |
-| [Network Topology](./HomeLab/Network-Topology/)                                           | Virtualized security lab architecture           |
+| [AD Environment Setup](./HomeLab/AD_Environment_Setup/)                                   | Active Directory domain and lab environment     |
+| [Wazuh Server](./HomeLab/Creating_Wazuh_Server/)                                          | Wazuh SIEM deployment                           |
+| [Network Topology](./HomeLab/Network_Topology/)                                           | Virtualized security lab architecture           |
 | [Kerberoasting](./HomeLab/Kerberoasting/)                                                 | Active Directory credential attack and analysis |
 | [Privilege Escalation](./HomeLab/Privilege-Escalation/)                                   | Simulated privilege escalation activity         |
-| [Wazuh Agent Deployment](./HomeLab/AD-Environment-Setup/Wazuh-Agent-Deployment-WIN-DC01/) | Windows endpoint monitoring                     |
+| [Wazuh Agent Deployment](./HomeLab/AD_Environment_Setup/Wazuh_Agent_Deployment_WIN_DC01/) | Windows endpoint monitoring                     |
 
 ## Featured Home Lab Exercise
 
@@ -93,7 +93,7 @@ A controlled Active Directory attack beginning with low-privileged domain creden
 7. Credential recovery
 8. Documentation of the attack chain
 
-[Read the Red Team Write-Up](./HomeLab/Kerberoasting/Kerberoasting-RedTeam-Writeup.md)
+[Read the Red Team Write-Up](./HomeLab/Kerberoasting/Red_Team.md)
 
 ---
 
@@ -105,7 +105,7 @@ My defensive work focuses on understanding what an attack looks like from the pe
 
 Simulated repeated failed RDP authentication attempts and investigated Windows Event ID 4625 through Wazuh.
 
-[View Project](./Bruteforce_detection_sim/)
+[View Project](./Bruteforce_Detection_Sim/)
 
 ## Sysmon & Wazuh Detection Engineering
 
@@ -152,12 +152,20 @@ Hands-on security labs covering web security, enumeration, exploitation, and sec
 
 | Room                  | Skills Practiced                 | Write-Up                                       |
 | --------------------- | -------------------------------- | ---------------------------------------------- |
+<<<<<<< HEAD
 | TakeOver              | Subdomain enumeration            | [Write-Up](./THM/TakeOver/TakeOver.md)         |
 | Lo-Fi                 | Local File Inclusion             | [Write-Up](./THM/Lo-Fi/Lo-Fi.md)               |
 | Lookup                | Web enumeration and exploitation | [Write-Up](./THM/Lookup/Lookup.md)             |
 | web-app               | Web application security         | [Write-Up](./THM/web-app/web-app.md)           |
 | Advent of Cyber — XSS | Cross-Site Scripting             | [Write-Up](./THM/AoC-2025-XSS/AoC-2025-XSS.md) |
 | PHP2Shell             | PHP engine internals, memory corruption, CVE analysis | [Write-Up](./THM/PHP2Shell/PHP2Shell.md) |
+=======
+| TakeOver              | Subdomain enumeration            | [Write-Up](./THM/TakeOver/README.md)         |
+| Lo-Fi                 | Local File Inclusion             | [Write-Up](./THM/Lo_Fi/README.md)               |
+| Lookup                | Web enumeration and exploitation | [Write-Up](./THM/Lookup/README.md)             |
+| web-app               | Web application security         | [Write-Up](./THM/Web_App/README.md)           |
+| Advent of Cyber — XSS | Cross-Site Scripting             | [Write-Up](./THM/AoC_2025/XSS/README.md) |
+>>>>>>> 3eb8f3f (Fix README and THM link paths after rename)
 
 ---
 

